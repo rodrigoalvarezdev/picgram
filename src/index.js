@@ -1,6 +1,6 @@
 const app = require('./app');
 require('./database');
 
-app.listen(3000, _ =>{
-    console.log('server on port 3000');
+app.listen(app.get('port'), _ =>{
+    console.log(`server on port ${app.get('port')}`);
 });
