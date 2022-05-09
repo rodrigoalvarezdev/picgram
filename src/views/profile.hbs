@@ -1,0 +1,99 @@
+<h2 class="text-center">Bienvenido {{username}}</h2>
+<div class="row">
+  <div class="col-md-8">
+    {{#if images}}
+    <div class="card text-center m-2">
+      <div class="card-header bg-dark">
+
+        <h5 class="text-white">Todas tus imagenes</h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          {{#each images}}
+          <div class="card col-md-4 mb-2">
+            <div class="card-header">
+              <div class="row">
+                <div class="col">
+                  <h5>{{title}}</h5>
+                </div>
+                <div class="col">
+                  <div class="dropdown">
+                    <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                    </a>
+
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <li><a class="dropdown-item" href="/delete/{{_id}}">eliminar</a></li>
+                      <li><a class="dropdown-item" href="/update/{{_id}}">modificar</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+            <div class="card-body">
+
+              <a href="/photo/{{_id}}">
+                <img src="{{url}}" alt="" class="w-100 h-100" />
+              </a>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    {{/if}}
+  </div>
+  <div class="col-md-4">
+    <div class="col-md">
+      <div class="card mt-2">
+        <div class="card-header bg-dark text-center">
+          <h5 class="text-white">Estadisticas</h5>
+        </div>
+        <div class="card-body text-center">
+          <ul class="list-group">
+            <li class="list-group-item">imagenes totales:
+              {{stats.totalimages}}</li>
+            <li class="list-group-item">comentarios totales:
+              {{stats.totalcomments}}
+            </li>
+            <li class="list-group-item">vistas totales:
+              {{stats.totalviews}}</li>
+            <li class="list-group-item">likes totales: {{stats.totallikes}}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card mt-2">
+        <div class="card-header bg-dark text-center">
+          <h5 class="text-white">Imagenes con mas me gustas</h5>
+        </div>
+        <div class="row mx-auto">
+
+          {{#each imgLikes}}
+          <div class="card-body col-md-5 m-2 p-2">
+            <a href="/photo/{{_id}}">
+              <img class="w-100 h-100" src="{{url}}" alt="" />
+            </a>
+          </div>
+          {{/each}}
+        </div>
+
+      </div>
+      <div class="card mt-4">
+        <div class="card-header bg-dark text-center">
+          <h5 class="text-white">Imagenes mas vistas</h5>
+        </div>
+        <div class="row mx-auto">
+          {{#each imgViews}}
+          <div class="card-body col-md-5 m-2 p-2">
+            <a href="/photo/{{_id}}">
+              <img class="w-100 h-100" src="{{url}}" alt="" />
+            </a>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

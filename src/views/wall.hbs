@@ -1,0 +1,46 @@
+<h2 class="text-center">Todas las publicaciones</h2>
+{{#each images}}
+    <div class=" card w-50 mx-auto mt-4 ">
+        <div class="card-header bg-dark">
+            <h5 class="text-center text-white">
+                {{title}}
+            </h5>
+            <h6 class="text-center text-white">posteado por : <a href="/visit/{{user_id}}">{{username}}</a></h6>
+        </div>
+        <div class="card-body">
+           <a href="/photo/{{_id}}"><img src="{{url}}" alt="" class="container-fluid"></a> 
+        </div>
+        <div class="card-footer bg-light d-flex justify-content-between">
+            <p>
+                <span class="likes-count">{{likes}}</span>
+                <i class="fa-solid fa-heart"></i>
+            </p>
+            <p>
+                <span>{{views}}</span>
+                <i class="fa-solid fa-eye"></i>
+            </p>
+            <p>
+                <i class="fa-solid fa-clock"></i>
+                <span>{{timeago timestamp}}</span>
+            </p>
+        </div>
+        <div class="card-footer">
+            <h5>Descripcion</h5>
+            <hr>
+            <p>{{description}}</p>
+        </div>
+        {{#if co}}
+            <h5 class="text-center">comentarios</h5>
+        {{/if}}
+        {{#each co}}
+        
+            <p class="text-center">{{this}}</p>
+            <hr>
+
+        {{/each}}
+    </div>
+{{/each}}
+<div class="mx-auto w-50 text-center d-flex justify-content-between my-3">
+    <a class="btn btn-success" href="/wall?page={{less options.actualPage options.prev}}">prev</a>
+    <a class="btn btn-success" href="/wall?page={{add options.actualPage options.next}}">next</a>
+</div>

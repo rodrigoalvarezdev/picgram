@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-2 mt-3">
+      <a href="/mail-box-sended" class="btn btn-success m-2">enviados</a>
+      <a href="/mail-box-received" class="btn btn-success m-2">recibidos</a>
+    </div>
+    <div class="col-md-10 mt-4">
+      <div class="card">
+        <div class="card-header text-center bg-dark text-white">TODOS LOS MENSAJES</div>
+        <div class="card-body">
+          <ul class="list-group">
+            {{#each mail}}
+              <li class="list-group-item bg-secondary text-white">de: {{sender}}</li>
+              <p class="px-4 mt-2">{{message}}</p>
+            {{/each}}
+          </ul>
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+          <a href="/write-message" class="btn btn-success">enviar mensaje</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

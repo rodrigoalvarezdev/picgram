@@ -1,0 +1,65 @@
+<div class="row mx-2">
+    <div class="col-md-8">
+        <div class=" card  mt-2">
+            <div class="card-header bg-dark">
+                <h5 class="text-center text-white">
+                    {{image.title}}
+                </h5>
+                <h6 class="text-white">Autor: <a href="/visit/{{image.user_id}}">{{image.username}}</a></h6>
+            </div>
+            <div class="card-body">
+                <img src="{{image.url}}" alt="" class="container-fluid">
+            </div>
+            <div class="card-footer bg-light d-flex justify-content-between">
+                <button data-id="{{image._id}}" id="btn-like" class="btn btn-success">like <i class="fa-regular fa-thumbs-up"></i></button>
+                <p>
+                    <span class="likes-count">{{image.likes}}</span>
+                    <i class="fa-solid fa-heart"></i>
+                </p>
+                <p>
+                    <span>{{image.views}}</span>
+                    <i class="fa-solid fa-eye"></i>
+                </p>
+                <p>
+                    <i class="fa-solid fa-clock"></i>
+                    <span>{{timeago image.timestamp}}</span>
+                </p>
+            </div>
+        </div>
+        <div class="card mt-2">
+            <div class="card-header bg-dark text-center">
+                <button id="btn-comments" class="btn btn-success">Aprieta para comentar</button>
+            </div>
+            <div id="card-comments" class="card-body card-comments">
+                <form action="/photo/{{image._id}}" method="POST">
+                    <div class="form-group">
+                        <div class="form-control">
+                            <textarea class="form-control" name="text" rows="5" placeholder="ingresa tu comentario"></textarea>
+                        </div>
+                        <div class="form-cotrol">
+                            <input class="btn btn-success mt-2" type="submit" name="" id="">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mt-2">
+            <div class="card-header bg-dark">
+                <h5 class="text-center text-white">comentarios  </h5>
+            </div>
+            {{#each comment}}
+                <div class="card-body pt-2">
+                    <a href="/visit/{{name_id}}">
+                    
+                    <h5>{{name}}</h5>
+                    </a>
+                    <p>{{text}}</p>
+                    <hr>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+
+</div>

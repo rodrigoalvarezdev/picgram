@@ -1,0 +1,39 @@
+<main class="form-signin text-center">
+  <form method="POST" action="/signup">
+    <img class="mb-4 img-picgram" src="img/picgram.jpg" alt="" width="40%" height="20%">
+    <h1 class="h3 mb-3 fw-normal">Registrate!</h1>
+    <div class="form-floating mb-3">
+      <input type="text" name="user" class="form-control" placeholder="usuario">
+    </div>
+    <div class="form-floating mb-3">
+      <input type="email" name="email" class="form-control" placeholder="name@example.com">
+    </div>
+    <div class="form-floating">
+      <input type="password" name="password" class="form-control" placeholder="Password">
+      
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Registrar</button>
+  </form>
+  <h6>ya estas registrado?</h6>
+  <a class="btn btn-primary" href="/login">Ingresá</a>
+</main>
+
+<div class="container">
+  {{#if validations}}
+  {{#each validations}}
+    <div class="alert alert-warning alert-dismissible fade show text-center d-inline-block" role="alert">
+  <strong>Hola</strong> {{msg}}
+  <button type="button" class="btn-close btn-danger" data-bs-dismiss="alert">x</button>
+</div>
+  {{/each}}
+  {{/if}}
+
+  {{#if nreg}}
+    <div class="alert alert-warning alert-dismissible fade show text-center d-inline-block" role="alert">
+  <strong>Hola</strong> {{nreg}}
+  <button type="button" class="btn-close btn-danger" data-bs-dismiss="alert">x</button>
+</div>
+  {{/if}}
+  
+</div>

@@ -1,0 +1,38 @@
+
+<main class="form-signin text-center">
+  {{#if success}}
+
+  <div class="alert alert-success alert-dismissible fade show text-center d-inline-block" role="alert">
+  <strong>Hola</strong> {{success}}
+  <button type="button" class="btn-close btn-danger" data-bs-dismiss="alert">x</button>
+</div>
+  {{/if}}
+
+  {{#if loginmje}}
+    <div class="alert alert-success alert-dismissible fade show text-center d-inline-block" role="alert">
+  <strong>Hola</strong> {{loginmje}}
+  <button type="button" class="btn-close btn-danger" data-bs-dismiss="alert">x</button>
+</div>
+  {{/if}}
+
+  <form method="POST" action="/login">
+    <img class="mb-4 img-picgram" src="img/picgram.jpg" alt="" width="40%" height="20%">
+    <h1 class="h3 mb-3 fw-normal">Inicia sesion!</h1>
+    <div class="form-floating mb-3">
+      <input type="email" name="email" class="form-control"  placeholder="name@example.com">
+      
+    </div>
+    <div class="form-floating mb-3">
+      <input type="password" name="password" class="form-control"  placeholder="contraseña">
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Ingresar</button>
+  </form>
+  <p>aun no estas registrado?</p>
+  <a href="/signup"><button class="btn btn-primary">Registrarse</button></a>
+
+<p>
+  {{body}}
+</p>
+  
+</main>

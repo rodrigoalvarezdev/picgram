@@ -1,0 +1,53 @@
+<main class="form-signin text-center">
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <div class="card-header bg-dark mb-2">
+            <h5 class="card-title text-white">
+               <i class="far fa-image"></i> sube una imagen
+            </h5>
+        </div>
+        <div class="form-floating mb-2">
+        <input type="file" name="img" class="form-control" required>
+        </div>
+        <div class="form-floating mb-2">
+        <input type="text" name="title" class="form-control" placeholder="Agrega un titulo" required>
+        </div>
+        <div class="form-floating mb-2">
+        <input type="text" name="description" class="form-control" placeholder="Agrega una descripcion" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Subir</button>
+    </form>
+    {{#if validations}}
+        {{#each validations}}
+    <div class="alert alert-warning alert-dismissible fade show text-center d-inline-block" role="alert">
+  <strong>Hola</strong> {{msg}}
+  <button type="button" class="btn-close btn-danger" data-bs-dismiss="alert">x</button>
+</div>
+  {{/each}}
+    {{/if}}
+</main>
+
+{{#if images}}
+<div class="card text-center m-4">
+    <div class="card-header bg-dark">
+
+        <h5 class="text-white">tus posteos mas recientes</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            {{#each images}}
+            <div class="card col-md-4 mb-2">
+                <div class="card-header">
+                    <h5>{{title}}</h5>
+                </div>
+                <div class="card-body">
+
+                <a href="/photo/{{_id}}">
+                    <img src="{{url}}" alt="" class="w-100 h-100">
+                </a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+{{/if}}
