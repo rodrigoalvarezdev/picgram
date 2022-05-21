@@ -4,7 +4,8 @@ const bcrypt = require('bcrypt');
 const userSchema = new Schema({
     user: String,
     email: String,
-    password: String
+    password: String,
+    image: {type: String, default: '/img/picgram.jpg'}
 });
 
 userSchema.statics.encryptPassword = async (password)=>{

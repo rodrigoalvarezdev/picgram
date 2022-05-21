@@ -84,4 +84,11 @@ body {
   border-radius: 50%;
 }
 
+.img-change {
+  border-radius: 50%;
+}
+
+.card-profile {
+  background-color: transparent;
+}
 

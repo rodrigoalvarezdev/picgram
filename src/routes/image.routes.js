@@ -24,4 +24,8 @@ router.get('/update/:id',helper.authenticated, ctrlImage.getUpdateImage);
 
 router.post('/update/:id',helper.authenticated, ctrlImage.postUpdateImage);
 
+router.get('/change-profile', ctrlImage.getChange);
+
+router.post('/change-profile', ctrlImage.postChange);
+
 module.exports = router;

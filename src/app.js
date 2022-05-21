@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const path = require('path');
 const {create} = require('express-handlebars');
 const session = require('express-session');
@@ -13,11 +14,17 @@ require('dotenv').config();
 require('./passport/login.passport');
 
 const storage = multer.diskStorage({
-    destination: path.join(__dirname, 'public/upload'),
+    destination: (req, file, cb)=>{
+        if (file.fieldname === 'img'){
+            cb(null, path.join(__dirname, 'public/upload'))
+        }else{
+            cb(null, path.join(__dirname, 'public/upload/profile'))
+        }
+    },
     filename: ((req, file, cb)=>{
         cb(null, v4() + path.extname(file.originalname))
     })
-});
+})
 
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -28,10 +35,15 @@ const expHbs = create({
     layoutsDir: path.join(app.get('views'), 'layout'),
     partialsDir: path.join(app.get('views'), 'partials'),
     defaultLayout: 'main',
-    helpers: require('./helpers/helper.hbs')
+    helpers: require('./helpers/helper.hbs'),
+    runtimeOptions: {
+        allowProtoPropertiesByDefault: true,
+        allowedProtoMethods: true
+    }
 });
 app.engine('.hbs', expHbs.engine);
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(session({
@@ -42,9 +54,19 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
 app.use(multer({
     storage
-}).single('img'));
+}).fields([
+    {
+        name: 'img',
+        maxCount: 1
+    },
+    {
+        name: 'profile',
+        maxCount: 1
+    }
+]));
 
 app.use((req, res, next)=>{
     app.locals.success = req.flash('success');

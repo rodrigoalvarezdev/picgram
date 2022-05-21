@@ -1,5 +1,18 @@
 <h2 class="text-center">Bienvenido {{username}}</h2>
 <div class="row">
+  <div class="col-md-4 mx-auto">
+    <div class="card card-profile">
+      <div class="card-header bg-dark text-white">
+        <h6 class="text-center">perfil</h6>
+      </div>
+      <img class="mx-auto img-fluid img-change" width="150rem" src="{{userpassport.image}}" alt="">
+      <div class="card-footer">
+        <h6 class="text-center"><a class="btn btn-success" href="/change-profile">cambiar</a></h6>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
   <div class="col-md-8">
     {{#if images}}
     <div class="card text-center m-2">

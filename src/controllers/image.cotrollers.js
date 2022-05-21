@@ -18,7 +18,8 @@ ctrlImage.getUpload = async (req, res)=>{
 };
 
 ctrlImage.postImage = async (req, res)=>{
-    const result = await cloudinary.v2.uploader.upload(req.file.path);
+    console.log(req.files.img[0].path)
+    const result = await cloudinary.v2.uploader.upload(req.files.img[0].path);
     const image = new Image({
         title: req.body.title,
         description: req.body.description,
@@ -28,7 +29,7 @@ ctrlImage.postImage = async (req, res)=>{
         username: req.user.user
     });
     await image.save();
-    await fs.unlink(req.file.path);
+    await fs.unlink(req.files.img[0].path);
     res.redirect('/upload');
 };
 
@@ -60,7 +61,7 @@ ctrlImage.getProfile = async (req, res)=>{
 
 ctrlImage.getWall = async (req,res)=>{
     const page = req.query.page || 1;
-    const image = await Image.paginate({}, {limit:5, page, lean: true, sort:{timestamp:-1}});
+    const image = await Image.paginate({}, {limit:5, page,sort:{timestamp:-1}});
     const images = image.docs;
     
     const options = {};
@@ -113,4 +114,19 @@ ctrlImage.postUpdateImage = async (req, res)=>{
     const image = await Image.findByIdAndUpdate(id, {title, description});
     res.redirect('/profile');
 }
+
+ctrlImage.getChange = async (req, res)=>{
+    res.render('change-profile');
+};
+
+ctrlImage.postChange = async (req, res)=>{
+    const result = await cloudinary.v2.uploader.upload(req.files.profile[0].path);
+    const user = await User.findOne({user:req.user.user});
+    user.image = result.url;
+    const save = await user.save();
+    await fs.unlink(req.files.profile[0].path);
+    console.log(save);
+    
+    res.redirect('/profile');
+};
 module.exports = ctrlImage;
