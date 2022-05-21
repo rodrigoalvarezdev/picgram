@@ -120,13 +120,18 @@ ctrlImage.getChange = async (req, res)=>{
 };
 
 ctrlImage.postChange = async (req, res)=>{
-    const result = await cloudinary.v2.uploader.upload(req.files.profile[0].path);
-    const user = await User.findOne({user:req.user.user});
-    user.image = result.url;
-    const save = await user.save();
-    await fs.unlink(req.files.profile[0].path);
-    console.log(save);
-    
-    res.redirect('/profile');
+    try {
+        const result = await cloudinary.v2.uploader.upload(req.files.profile[0].path);
+        const user = await User.findOne({user:req.user.user});
+        user.image = result.url;
+        const save = await user.save();
+        await fs.unlink(req.files.profile[0].path);
+        console.log(save);
+        
+        res.redirect('/profile');
+        
+    } catch (error) {
+        console.error(error);
+    }
 };
 module.exports = ctrlImage;
